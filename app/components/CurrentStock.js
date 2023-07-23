@@ -11,8 +11,6 @@ const CurrentStock = () => {
     }, [])
 
 
-console.log(product);
-
 
 
     return (

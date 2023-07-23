@@ -17,15 +17,30 @@ const client = new MongoClient(uri, {
 
 export async function GET(request) {
   try {
+    const query = request.nextUrl.searchParams.get('query')
+
 
     const database = client.db('stock');
     const inventory = database.collection('inventory')
 
     // db.your_collection_name.createIndex({ productSlug: 1 })
-    
+
+    if(query){
+      console.log(query)
+      const allproducts = await inventory.aggregate([{
+        $match: {
+          $or: [
+            { productSlug: { $regex: query, $options: 'i'} }
+          ]
+        }
+      }]).toArray()
+
+      return NextResponse.json({success: true, allproducts})
+    }
+
     // await client.connect();
     const allproducts = await inventory.find().toArray()
-    return NextResponse.json({success: true, allproducts})
+    return NextResponse.json({ success: true, allproducts })
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
@@ -42,7 +57,7 @@ export async function POST(request) {
     const inventory = database.collection('inventory')
     // await client.connect();
     const product = await inventory.insertOne(body)
-    return NextResponse.json({product, "ok": true})
+    return NextResponse.json({ product, "ok": true })
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
