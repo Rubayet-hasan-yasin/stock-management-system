@@ -17,14 +17,18 @@ const client = new MongoClient(uri, {
 
 export async function GET(request) {
   try {
+
     const database = client.db('stock');
     const inventory = database.collection('inventory')
+
+    // db.your_collection_name.createIndex({ productSlug: 1 })
+    
     // await client.connect();
     const allproducts = await inventory.find().toArray()
-    return NextResponse.json({allproducts})
+    return NextResponse.json({success: true, allproducts})
   } finally {
     // Ensures that the client will close when you finish/error
-    await client.close();
+    // await client.close();
   }
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Search = () => {
     return (
-        <div className='container mx-auto bg-red-50'>
+        <div className='container mx-auto my-10'>
             <h3 className='text-2xl font-semibold mb-5'>Search A Product</h3>
 
             <div className='flex mb-6'>

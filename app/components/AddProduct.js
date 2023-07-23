@@ -17,7 +17,7 @@ const AddProduct = () => {
         
 
         try{
-            const response = await fetch('/api/product', {
+            const response = await fetch('http://localhost:3000/api/product', {
                 method: "POST",
                 headers: {
                     'content-type': 'application/json'
@@ -40,12 +40,12 @@ const AddProduct = () => {
 
 
     return (
-        <div className='container mx-auto bg-red-50'>
+        <div className='container mx-auto my-10'>
             <h3 className='text-2xl font-semibold mb-5'>Add A Product</h3>
 
             <form onSubmit={addProduct}>
                 <label>Product Slug</label>
-                <input type="text" name="productSlug" id="" className='w-full px-4 py-1 border border-gray-300'/>
+                <input type="text" name="productSlug" id="" className='w-full px-4 py-1 border border-gray-300 shadow-y-2xl shadow-gray-700'/>
 
                 <label>Quantity</label>
                 <input type="text" name="quantity" id="" className='w-full px-4 py-1 border border-gray-300'/>
